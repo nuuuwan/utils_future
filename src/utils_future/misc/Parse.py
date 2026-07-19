@@ -63,3 +63,9 @@ class Parse:
         x = str(x).strip()
         x = re.sub(r"\s+", " ", x)
         return x
+
+
+    @staticmethod
+    def date_str(x) -> str:
+        dt = parser.parse(x)
+        return dt.strftime("%Y-%m-%d")

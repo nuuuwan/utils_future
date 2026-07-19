@@ -11,8 +11,7 @@ class String:
 
     @cached_property
     def pascal(self) -> str:
-        s = self.s
-        
+        s = self.s    
         s = s.replace("&", "_and_")
         s = s.replace("/", "_or_")
         s = s.replace(".", "_")
@@ -20,6 +19,7 @@ class String:
         s = s.replace(" ", "_")
         s = s.replace("-", "_")
         s = "".join(c if c.isalnum() else "_" for c in s)
+        
 
         return "".join(word.capitalize() for word in s.split("_"))
     
@@ -27,18 +27,18 @@ class String:
     @cached_property
     def snake(self) -> str:
         s = self.s
-        
+        s = s.replace("(", "_")
+        s = s.replace(")", "_")
         s = s.replace("&", "_and_")
         s = s.replace("/", "_or_")
         s = s.replace(".", "_")
         s = s.replace(",", "_")
         s = s.replace(" ", "_")
         s = s.replace("-", "_")
-        s = "".join(c if c.isalnum() else "_" for c in s)
-
         s = re.sub(r"_+", "_", s)  
+        s = s.strip('_')
 
-        return "_".join(word.lower() for word in s.split("_"))
+        return s.lower()
 
     @cached_property
     def int(self) -> int:
@@ -52,4 +52,9 @@ class String:
         try:
             return float(self.cleaned_s)
         except ValueError:
-            return None
+            return None 
+        
+
+    @staticmethod
+    def join(*s_list: list[str]):
+        return " ".join(s_list)

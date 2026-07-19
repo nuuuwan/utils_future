@@ -14,3 +14,9 @@ from utils_future.misc.String import String
 from utils_future.misc.WWW import WWW
 from utils_future.time.Time import Time
 from utils_future.time.TimeFormat import TimeFormat
+
+import os
+class osx:
+    @staticmethod
+    def startfile(path: str):
+        os.system(f"open {path}")
