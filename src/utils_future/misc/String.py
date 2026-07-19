@@ -1,5 +1,5 @@
 from functools import cached_property
-
+import re
 
 class String:
     def __init__(self, s: str):
@@ -12,7 +12,7 @@ class String:
     @cached_property
     def pascal(self) -> str:
         s = self.s
-
+        
         s = s.replace("&", "_and_")
         s = s.replace("/", "_or_")
         s = s.replace(".", "_")
@@ -22,6 +22,23 @@ class String:
         s = "".join(c if c.isalnum() else "_" for c in s)
 
         return "".join(word.capitalize() for word in s.split("_"))
+    
+
+    @cached_property
+    def snake(self) -> str:
+        s = self.s
+        
+        s = s.replace("&", "_and_")
+        s = s.replace("/", "_or_")
+        s = s.replace(".", "_")
+        s = s.replace(",", "_")
+        s = s.replace(" ", "_")
+        s = s.replace("-", "_")
+        s = "".join(c if c.isalnum() else "_" for c in s)
+
+        s = re.sub(r"_+", "_", s)  
+
+        return "_".join(word.lower() for word in s.split("_"))
 
     @cached_property
     def int(self) -> int:

@@ -1,5 +1,5 @@
 from utils_future.file.FileOrDirectory import FileOrDirectory
-
+import os
 
 class File(FileOrDirectory):
     ENCODING = "utf-8"
@@ -11,3 +11,8 @@ class File(FileOrDirectory):
     def write(self, data):
         with open(self.path, "w", encoding=self.ENCODING) as f:
             return f.write(data)
+
+
+    def delete(self):
+        if self.exists():
+            os.remove(self.path)
