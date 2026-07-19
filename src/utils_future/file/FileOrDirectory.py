@@ -5,7 +5,6 @@ from functools import cached_property
 
 class FileOrDirectory(ABC):
     def __init__(self, *path_items):
-        print(path_items)
         parsed_path_items = []
         for item in path_items:
             if isinstance(item, FileOrDirectory):

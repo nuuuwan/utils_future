@@ -36,3 +36,10 @@ class String:
             return int(float(self.cleaned_s))
         except ValueError:
             return None
+
+    @cached_property
+    def float(self) -> float:
+        try:
+            return float(self.cleaned_s)
+        except ValueError:
+            return None
