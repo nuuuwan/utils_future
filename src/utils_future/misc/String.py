@@ -13,13 +13,6 @@ class String:
     def pascal(self) -> str:
         s = self.s
 
-        s = s.replace(" - ", "_to_")
-
-        if "years" in s:
-            if s[2:3] == "_":
-                s = s[0:2] + "_to_" + s[3:]
-            s = s.replace("_to_or_", "_or_")
-
         s = s.replace("&", "_and_")
         s = s.replace("/", "_or_")
         s = s.replace(".", "_")
