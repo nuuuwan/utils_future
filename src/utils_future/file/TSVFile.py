@@ -14,5 +14,16 @@ class TSVFile(File):
             reader = csv.reader(f, delimiter="\t")
             headers = next(reader)
             d_list = [dict(zip(headers, row)) for row in reader if row]
-            log.debug(f"Read {len(d_list)} rows from {self}")
             return d_list
+
+
+    def write(self, d_list):
+        if not d_list:
+            log.warning(f"No data to write to {self}")
+            return
+        headers = d_list[0].keys()
+        with open(self.path, "w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=headers, delimiter="\t")
+            writer.writeheader()
+            writer.writerows(d_list)
+            
