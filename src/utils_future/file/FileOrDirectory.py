@@ -54,5 +54,7 @@ class FileOrDirectory(ABC):
         return f"{self.short_path} ({self.size_human_readable()})"
 
     def open(self, app=None):
+        if not self.exists():
+            return
         app = app or "open"
         os.system(f'{app} "{self.path}"')
