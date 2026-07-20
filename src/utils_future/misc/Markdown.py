@@ -26,3 +26,23 @@ class Markdown:
         ]
 
         return [header, separator] + rows + [""]
+
+    @staticmethod
+    def pie_chart(title, d_list, key_key, key_value, key_color) -> list[str]:
+        kv_list = "\n    ".join(f'"{d[key_key]}" : {d[key_value]}' for d in d_list)
+
+        theme_vars = ", ".join(
+            f'"pie{i+1}": "{d[key_color]}"'
+            for i, d in enumerate(d_list)
+            if key_color in d
+        )
+        init_directive = f'%%{{init: {{"theme": "base", "themeVariables": {{{theme_vars}}}}}}}%%\n' if theme_vars else ""
+
+        return [
+            f"""
+```mermaid
+{init_directive}pie title {title}
+{kv_list}
+```
+    """
+        ]
