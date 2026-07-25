@@ -19,10 +19,11 @@ class TSVFile(File):
 
     def write(self, d_list):
         if not d_list:
-            log.warning(f"No data to write to {self}")
-            return
+            raise ValueError("Cannot write an empty list to TSV file.")
         first_d = d_list[0]
-        assert isinstance(first_d, dict), f"Expected a list of dicts, got {type(first_d)}"
+        if not isinstance(first_d, dict):
+            raise ValueError("Each item in the list must be a dictionary.")
+
         headers = list(first_d.keys())
         with open(self.path, "w", encoding="utf-8", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=headers, delimiter="\t")

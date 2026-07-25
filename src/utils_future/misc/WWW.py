@@ -4,7 +4,7 @@ import tempfile
 import requests
 
 from utils_future.misc.Log import Log
-
+from utils_future.file.File import File
 log = Log("WWW")
 
 
@@ -16,22 +16,15 @@ class WWW:
         return f"🌐{self.url}"
 
     def download(self, output_file=None):
-        if output_file is None:
-            suffix = os.path.splitext(self.url)[-1] or '.tmp'
-            _, path = tempfile.mkstemp(suffix=suffix)
-            response = requests.get(self.url, timeout=30)
-            response.raise_for_status()
-            with open(path, 'w', encoding='utf-8') as f:
-                f.write(response.text)
-            log.debug(f"Downloaded {self} to {path}")
-            return path
-
+        
         if output_file.exists():
+            log.debug(f"File {output_file} already exists. Skipping download.")
             return
 
         response = requests.get(self.url, timeout=10)
         response.raise_for_status()
         content = response.text
 
-        output_file.write(content)
+        File(output_file.path).write(content)
         log.debug(f"Downloaded {self} to {output_file}")
+        
