@@ -21,7 +21,9 @@ class TSVFile(File):
         if not d_list:
             log.warning(f"No data to write to {self}")
             return
-        headers = d_list[0].keys()
+        first_d = d_list[0]
+        assert isinstance(first_d, dict), f"Expected a list of dicts, got {type(first_d)}"
+        headers = list(first_d.keys())
         with open(self.path, "w", encoding="utf-8", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=headers, delimiter="\t")
             writer.writeheader()
