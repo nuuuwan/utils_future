@@ -10,6 +10,12 @@ class Directory(FileOrDirectory):
 
     @classmethod
     def get_temp(cls, *args):
-        director = cls(tempfile.gettempdir(), *args)
-        director.make()
-        return director
+        directory = cls(tempfile.gettempdir(), *args)
+        directory.make()
+        return directory
+
+
+    def __iter__(self):
+        if not self.exists():
+            return iter([])
+        return iter(os.listdir(self.path))

@@ -18,7 +18,6 @@ class WWW:
     def download(self, output_file=None):
         
         if output_file.exists():
-            log.debug(f"File {output_file} already exists. Skipping download.")
             return
 
         response = requests.get(self.url, timeout=10)
