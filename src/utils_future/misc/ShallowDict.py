@@ -38,7 +38,7 @@ class ShallowDict(MutableMapping):
         return result
 
     @classmethod
-    def from_deep(cls, nested_dict):
+    def from_deep(cls, deep_d):
         flat = {}
 
         def _recurse(node, path):
@@ -48,7 +48,7 @@ class ShallowDict(MutableMapping):
             for key, child in node.items():
                 _recurse(child, path + [key])
 
-        _recurse(nested_dict, [])
+        _recurse(deep_d, [])
         return cls(flat)
 
     def __eq__(self, other):
