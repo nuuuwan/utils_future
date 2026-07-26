@@ -6,6 +6,9 @@ class ShallowDict(MutableMapping):
     def __init__(self, initial_dict=None):
         self._dict = initial_dict or {}
 
+    def get_dict(self):
+        return self._dict
+
     def __getitem__(self, key):
         return self._dict[key]
 

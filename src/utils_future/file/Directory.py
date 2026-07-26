@@ -14,7 +14,6 @@ class Directory(FileOrDirectory):
         directory.make()
         return directory
 
-
     def __iter__(self):
         if not self.exists():
             return iter([])

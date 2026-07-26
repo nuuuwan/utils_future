@@ -16,7 +16,6 @@ class TSVFile(File):
             d_list = [dict(zip(headers, row)) for row in reader if row]
             return d_list
 
-
     def write(self, d_list):
         if not d_list:
             raise ValueError("Cannot write an empty list to TSV file.")
@@ -29,4 +28,3 @@ class TSVFile(File):
             writer = csv.DictWriter(f, fieldnames=headers, delimiter="\t")
             writer.writeheader()
             writer.writerows(d_list)
-            

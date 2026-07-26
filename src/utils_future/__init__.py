@@ -1,5 +1,7 @@
 # flake8: noqa: F408
 
+import os
+
 from utils_future.file.Directory import Directory
 from utils_future.file.File import File
 from utils_future.file.JSONFile import JSONFile
@@ -15,7 +17,7 @@ from utils_future.misc.WWW import WWW
 from utils_future.time.Time import Time
 from utils_future.time.TimeFormat import TimeFormat
 
-import os
+
 class osx:
     @staticmethod
     def startfile(path: str):

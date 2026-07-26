@@ -64,7 +64,6 @@ class Parse:
         x = re.sub(r"\s+", " ", x)
         return x
 
-
     @staticmethod
     def date_str(x) -> str:
         dt = parser.parse(x)

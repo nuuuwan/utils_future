@@ -1,10 +1,8 @@
-import os
-import tempfile
-
 import requests
 
-from utils_future.misc.Log import Log
 from utils_future.file.File import File
+from utils_future.misc.Log import Log
+
 log = Log("WWW")
 
 
@@ -16,7 +14,7 @@ class WWW:
         return f"🌐{self.url}"
 
     def download(self, output_file=None):
-        
+
         if output_file.exists():
             return
 
@@ -26,4 +24,3 @@ class WWW:
 
         File(output_file.path).write(content)
         log.debug(f"Downloaded {self} to {output_file}")
-        
