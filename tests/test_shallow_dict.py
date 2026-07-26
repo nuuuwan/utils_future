@@ -307,3 +307,4 @@ class TestCase(unittest.TestCase):
         self.assertEqual(shallow_d.get_dict(), TEST_DATA_SHALLOW)
         deep_d = shallow_d.to_deep()
         self.assertEqual(TEST_DATA, deep_d)
+        self.assertLessEqual(len(str(deep_d)), len(str(shallow_d.get_dict())))
