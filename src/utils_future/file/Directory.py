@@ -1,6 +1,6 @@
 import os
 import tempfile
-
+import shutil
 from utils_future.file.FileOrDirectory import FileOrDirectory
 
 
@@ -8,9 +8,15 @@ class Directory(FileOrDirectory):
     def make(self):
         os.makedirs(self.path, exist_ok=True)
 
+    def remove(self):
+        if self.exists():
+            shutil.rmtree(self.path)
+
     @classmethod
     def get_temp(cls, *args):
         directory = cls(tempfile.gettempdir(), *args)
+        if directory.exists():
+            directory.remove()
         directory.make()
         return directory
 
