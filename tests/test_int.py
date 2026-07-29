@@ -25,7 +25,8 @@ class TestIntHumanize(unittest.TestCase):
     def test_10k_no_decimal(self):
         self.assertEqual(self.h(12_345), "12K")
 
-    def test_100k_rounds_to_tens(self):
+    def test_100k_rounds_
+    to_tens(self):
         self.assertEqual(self.h(123_456), "120K")
 
     # --- millions (M) ---
