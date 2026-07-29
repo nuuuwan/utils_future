@@ -10,8 +10,14 @@ class Percent:
         if self._value < 0:
             return "-" + Percent(-self._value).humanize
 
+        if self._value < 1e-10:
+            return "0%"
+
         if self._value < 0.01:
-            return "<0.01%"
+            return "<1%"
+
+        if self._value < 0.1:
+            return f"{self._value:.1%}"
 
         return f"{self._value:.0%}"
     
