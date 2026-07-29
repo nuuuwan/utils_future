@@ -56,3 +56,26 @@ class String:
     @staticmethod
     def join(*s_list: list[str]):
         return " ".join(s_list)
+
+    def shorten(self, max_len):
+        if max_len < 0:
+            raise ValueError("max_len must be non-negative")
+        if len(self.s) <= max_len:
+            return self.s
+        if max_len == 0:
+            return ""
+        if max_len == 1:
+            return self.s[0]
+
+        s = self.s.replace("-", " ")
+        words = s.split()
+        if len(words) > 1:
+            return "".join(words[:max_len])
+
+        # one word case
+        chars = [c for c in self.s]
+        non_first_chars = chars[1:]
+        consonent_non_first_chars = [
+            c for c in non_first_chars if c.lower() not in "aeiou"
+        ]
+        return "".join([chars[0]] + consonent_non_first_chars[: max_len - 1])
