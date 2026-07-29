@@ -20,10 +20,12 @@ class CustomLoggingFormatter(logging.Formatter):
 class Log(logging.Logger):
     def __init__(self, name: str = "unnamed", level: int = logging.DEBUG):
         super(Log, self).__init__(name, level)
-        self.propagate = False
+
+        self.propagate = True
 
         formatter = CustomLoggingFormatter("[%(name)s] %(message)s")
         sh = logging.StreamHandler()
         sh.setLevel(logging.DEBUG)
         sh.setFormatter(formatter)
-        self.handlers = [sh]  # noqa
+
+        self.addHandler(sh)

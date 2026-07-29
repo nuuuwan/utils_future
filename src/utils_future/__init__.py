@@ -8,6 +8,7 @@ from utils_future.file.JSONFile import JSONFile
 from utils_future.file.PDFFile import PDFFile
 from utils_future.file.TSVFile import TSVFile
 from utils_future.misc.Format import Format
+from utils_future.misc.Int import Int
 from utils_future.misc.Log import Log
 from utils_future.misc.Markdown import Markdown
 from utils_future.misc.Parse import Parse

@@ -1,5 +1,6 @@
 import os
 
+from utils_future.file.Directory import Directory
 from utils_future.file.FileOrDirectory import FileOrDirectory
 
 
@@ -17,3 +18,7 @@ class File(FileOrDirectory):
     def delete(self):
         if self.exists():
             os.remove(self.path)
+
+    def get_parent_directory(self):
+        parent_path = os.path.dirname(self.path)
+        return Directory(parent_path)

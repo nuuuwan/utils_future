@@ -14,7 +14,6 @@ class WWW:
         return f"🌐{self.url}"
 
     def download(self, output_file=None):
-
         if output_file.exists():
             return
 

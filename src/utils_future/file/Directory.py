@@ -1,6 +1,7 @@
 import os
-import tempfile
 import shutil
+import tempfile
+
 from utils_future.file.FileOrDirectory import FileOrDirectory
 
 
@@ -15,9 +16,6 @@ class Directory(FileOrDirectory):
     @classmethod
     def get_temp(cls, *args):
         directory = cls(tempfile.gettempdir(), *args)
-        if directory.exists():
-            directory.remove()
-        directory.make()
         return directory
 
     def __iter__(self):
