@@ -1,5 +1,26 @@
 import re
-from functools import cache, cached_property
+from functools import cache, cached_property, lru_cache
+
+_SNAKE_TABLE = str.maketrans(
+    {
+        "(": "_",
+        ")": "_",
+        "&": "_and_",
+        "/": "_or_",
+        ".": "_",
+        ",": "_",
+        " ": "_",
+        "-": "_",
+    }
+)
+_MULTI_UNDERSCORE = re.compile(r"_+")  # compiled once, module level
+
+
+@lru_cache(maxsize=None)
+def _to_snake(s: str) -> str:
+    s = s.translate(_SNAKE_TABLE)
+    s = _MULTI_UNDERSCORE.sub("_", s)
+    return s.strip("_").lower()
 
 
 class String:
@@ -25,19 +46,7 @@ class String:
 
     @cached_property
     def snake(self) -> str:
-        s = self.s
-        s = s.replace("(", "_")
-        s = s.replace(")", "_")
-        s = s.replace("&", "_and_")
-        s = s.replace("/", "_or_")
-        s = s.replace(".", "_")
-        s = s.replace(",", "_")
-        s = s.replace(" ", "_")
-        s = s.replace("-", "_")
-        s = re.sub(r"_+", "_", s)
-        s = s.strip('_')
-
-        return s.lower()
+        return _to_snake(self.s)
 
     @cached_property
     def int(self) -> int:
