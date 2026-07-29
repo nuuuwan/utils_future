@@ -9,8 +9,8 @@ class TestCase(unittest.TestCase):
             ("Colombo Central", 100, "Colombo Central"),
             ("Colombo Central", 2, "CC"),
             ("Ja-Ela", 2, "JE"),
-            ("Maharagama", 5, "Mhrgm"),
-            ("Maharagama", 3, "Mhr"),
+            ("Maharagama", 5, "MHR"),
+            ("Maharagama", 3, "MHR"),
         ]:
             with self.subTest(s=s, max_len=max_len):
                 self.assertEqual(String(s).shorten(max_len), expected)

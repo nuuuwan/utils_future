@@ -1,5 +1,5 @@
 import re
-from functools import cached_property
+from functools import cache, cached_property
 
 
 class String:
@@ -57,7 +57,7 @@ class String:
     def join(*s_list: list[str]):
         return " ".join(s_list)
 
-    @cached_property
+    @cache
     def shorten(self, max_len):
         if max_len < 0:
             raise ValueError("max_len must be non-negative")
@@ -68,10 +68,13 @@ class String:
         if max_len == 1:
             return self.s[0]
 
+        if max_len > 3:
+            max_len = 3
+
         s = self.s.replace("-", " ")
         words = s.split()
         if len(words) > 1:
-            return "".join([word[0] for word in words[:max_len]])
+            return "".join([word[0] for word in words[:max_len]]).upper()
 
         # one word case
         chars = [c for c in self.s]
@@ -79,4 +82,6 @@ class String:
         consonent_non_first_chars = [
             c for c in non_first_chars if c.lower() not in "aeiou"
         ]
-        return "".join([chars[0]] + consonent_non_first_chars[: max_len - 1])
+        return "".join(
+            [chars[0]] + consonent_non_first_chars[: max_len - 1]
+        ).upper()
