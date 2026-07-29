@@ -57,6 +57,7 @@ class String:
     def join(*s_list: list[str]):
         return " ".join(s_list)
 
+    @cached_property
     def shorten(self, max_len):
         if max_len < 0:
             raise ValueError("max_len must be non-negative")
