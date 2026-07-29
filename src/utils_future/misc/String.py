@@ -83,7 +83,7 @@ class String:
         s = self.s.replace("-", " ")
         words = s.split()
         if len(words) > 1:
-            return "".join([word[0] for word in words[:max_len]]).upper()
+            return "".join([word[0] for word in words]).upper()
 
         # one word case
         chars = [c for c in self.s]
