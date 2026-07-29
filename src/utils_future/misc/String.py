@@ -70,7 +70,7 @@ class String:
         s = self.s.replace("-", " ")
         words = s.split()
         if len(words) > 1:
-            return "".join(words[:max_len])
+            return "".join([word[0] for word in words[:max_len]])
 
         # one word case
         chars = [c for c in self.s]
