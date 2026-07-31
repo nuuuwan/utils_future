@@ -4,6 +4,7 @@ import json
 _SNAKE_TABLE = str.maketrans(
     {
         "(": "_",
+        "*": "",
         ")": "_",
         "&": "_and_",
         "/": "_or_",
