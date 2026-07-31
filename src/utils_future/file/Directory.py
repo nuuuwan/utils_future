@@ -19,6 +19,12 @@ class Directory(FileOrDirectory):
         return directory
 
     def __iter__(self):
+        from utils_future.file.File import File
         if not self.exists():
-            return iter([])
-        return iter(os.listdir(self.path))
+            return
+        for name in os.listdir(self.path):
+            child_path = os.path.join(self.path, name)
+            if os.path.isdir(child_path):
+                yield Directory(child_path)
+            else:
+                yield File(child_path)
