@@ -20,6 +20,7 @@ class Directory(FileOrDirectory):
 
     def __iter__(self):
         from utils_future.file.File import File
+
         if not self.exists():
             return
         for name in os.listdir(self.path):

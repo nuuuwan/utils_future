@@ -33,8 +33,21 @@ class FileOrDirectory(ABC):
             size_bytes /= 1024
         return f"{size_bytes:.1f} PB"
 
+    def get_size_emoji(self):
+        if not self.exists():
+            return ""
+        if self.size() > 1_000_000:
+            return '🐘'
+        if self.size() > 10_000_000:
+            return '🐋'
+        return ""
+
     def __str__(self):
-        return f"{self.path} ({self.size_human_readable()})"
+        return (
+            f"{self.path}"
+            + f" ({self.size_human_readable()})"
+            + f"{self.get_size_emoji()}"
+        )
 
     def __repr__(self):
         return str(self)

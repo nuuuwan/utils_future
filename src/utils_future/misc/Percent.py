@@ -20,4 +20,3 @@ class Percent:
             return f"{self._value:.1%}"
 
         return f"{self._value:.0%}"
-    

@@ -1,6 +1,7 @@
+import json
 import re
 from functools import cache, cached_property, lru_cache
-import json
+
 _SNAKE_TABLE = str.maketrans(
     {
         "(": "_",
@@ -96,7 +97,6 @@ class String:
             [chars[0]] + consonent_non_first_chars[: max_len - 1]
         ).upper()
 
-
-    @cached_property 
-    def json(self) -> str:    
+    @cached_property
+    def json(self) -> str:
         return json.dumps(self.s, ensure_ascii=False, indent=4)
